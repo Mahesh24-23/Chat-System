@@ -68,7 +68,7 @@ io.on('connection', function(socket) {
         });
     });
 
-    // get the highest ranking messages (most recent) up to channel_history_max size
+    // get the highest up to channel_history_max size
     var get_messages = redis.zrange('messages', -1 * channel_history_max, -1).then(function(result) {
         return result.map(function(x) {
             return JSON.parse(x);
@@ -104,6 +104,8 @@ io.on('connection', function(socket) {
         });
     }).catch(function(reason) {
         console.log('ERROR: ' + reason);
+        
+    
     });
 });
 
